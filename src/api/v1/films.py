@@ -5,14 +5,15 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 
 from api.v1.models_schems import Film, FilmList
 from core.config import settings
-from services.film import FilmService, get_film_service
+from services.objects_finder import ObjectsFinder
+from services.services import get_film_service
 
 router = APIRouter()
 
 
 @router.get("/{film_id}", response_model=Film)
 async def film_details(
-    film_id: str, film_service: FilmService = Depends(get_film_service)
+    film_id: str, film_service: ObjectsFinder = Depends(get_film_service)
 ) -> Film:
     film = await film_service.get_by_id(film_id)
     if not film:
@@ -38,7 +39,7 @@ async def film_list(
     filter: str = Query(
         None, description="Filter by genre id (Example: title::Wyclef Jean)"
     ),
-    film_service: FilmService = Depends(get_film_service),
+    film_service: ObjectsFinder = Depends(get_film_service),
 ) -> List[Film]:
-    films = await film_service.get_films_list(size, page, sort, filter)
+    films = await film_service.get_objs_list(size, page, sort, filter)
     return [FilmList(**film.dict(by_alias=True)) for film in films]

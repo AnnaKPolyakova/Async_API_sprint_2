@@ -3,6 +3,7 @@ LAST_EXTRACT_DATA_FOR_GENRE = "last_extract_data_for_genre"
 
 GENRES = "genres"
 PERSONS = "persons"
+MOVIES = "movies"
 
 TASK_ID = "task_id"
 
