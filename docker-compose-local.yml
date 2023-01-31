@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+
+  db:
+    image: postgres:12.4
+    volumes:
+      - ./storage/postgres/data:/var/lib/postgresql/data/
+      - ./db_sql_copy:/docker-entrypoint-initdb.d
+    env_file:
+      - .env
+    ports:
+      - ${POSTGRES_PORT}:5432
+
+  redis:
+    image: redis
+    restart: always
+    env_file:
+      - .env
+    volumes:
+    - ./storage/redis/data:/data
+    ports:
+    - ${REDIS_PORT}:6379
+
+  elastic:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
+    environment:
+      - discovery.type=single-node
+    env_file:
+      - .env
+    volumes:
+      - elastic_data:/var/lib/elasticsearch/data/
+    ports:
+      - ${ELASTIC_PORT}:9200
+    depends_on:
+      - redis
+    restart: always
+
+volumes:
+  elastic_data:
+  static_value:
+  media_value:

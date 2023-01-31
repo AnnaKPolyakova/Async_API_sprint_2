@@ -1,0 +1,92 @@
+version: '3.8'
+
+services:
+
+  db:
+    image: postgres:12.4
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+      - ./db_sql_copy:/docker-entrypoint-initdb.d
+    env_file:
+      - .env
+
+    healthcheck:
+      test: "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"
+      timeout: 2s
+      retries: 30
+    restart: always
+
+  redis:
+    image: redis
+    restart: always
+    env_file:
+      - .env
+    volumes:
+    - ./storage/redis/data:/data
+    ports:
+    - ${REDIS_PORT}:6379
+
+  elastic:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
+    environment:
+      - discovery.type=single-node
+    env_file:
+      - .env
+    volumes:
+      - elastic_data:/var/lib/elasticsearch/data/
+    ports:
+      - ${ELASTIC_PORT}:9200
+    depends_on:
+      - redis
+    restart: always
+
+  web:
+    build: .
+    restart: always
+    volumes:
+      - static_value:/code/static/
+      - media_value:/code/media/
+    env_file:
+      - .env
+    command: uvicorn main:app --host 0.0.0.0 --port 8000
+    depends_on:
+      - db
+      - redis
+      - elastic
+
+  etl:
+    build: .
+    restart: always
+    volumes:
+      - static_value:/code/static/
+      - media_value:/code/media/
+    env_file:
+      - .env
+    command: python -m etl.db_updater
+    depends_on:
+      - db
+      - redis
+      - elastic
+
+  nginx:
+    image: nginx:1.19.3
+    ports:
+      - "80:80"
+
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf
+      - static_value:/var/html/static/
+      - media_value:/var/html/media/
+
+    depends_on:
+      - web
+      - db
+      - redis
+      - elastic
+
+volumes:
+  postgres_data:
+  elastic_data:
+  static_value:
+  media_value:
+
