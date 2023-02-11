@@ -1,4 +1,5 @@
 from typing import Dict, List, Union
+
 from src.api.v1.base import IDAMixin
 
 

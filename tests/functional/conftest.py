@@ -1,13 +1,12 @@
 import asyncio
 import json
-import pytest
+
 import aiohttp
+import pytest
 from elasticsearch import AsyncElasticsearch
 
-from src.etl.defines import MOVIES_INDEX, GENRE_INDEX, PERSON_INDEX
-
+from src.etl.defines import GENRE_INDEX, MOVIES_INDEX, PERSON_INDEX
 from tests.functional.settings import test_settings
-
 from tests.functional.testdata.genres import GENRES_DATA
 from tests.functional.testdata.movies import MOVIES_DATA
 from tests.functional.testdata.persons import PERSONS_DATA
@@ -31,8 +30,9 @@ def get_str_query(index, data):
 
 @pytest.fixture(scope='session')
 async def es_client():
-    url = test_settings.ELASTIC_PROTOCOL + "://" + test_settings.ELASTIC_HOST_TEST\
-          + ":" + test_settings.ELASTIC_PORT
+    url = test_settings.ELASTIC_PROTOCOL + "://" + \
+          test_settings.ELASTIC_HOST_TEST + ":" + \
+          test_settings.ELASTIC_PORT
     es_client = AsyncElasticsearch(hosts=[url])
     yield es_client
     await es_client.close()

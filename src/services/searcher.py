@@ -1,7 +1,8 @@
-import logging
 from typing import List, Optional, Union
-from pydantic import BaseModel
+
 from elasticsearch import AsyncElasticsearch, NotFoundError
+from pydantic import BaseModel
+
 from src.services.abc_services.abs_searcher import ABSSearcher
 from src.services.defines import INDEXES_AND_MODELS
 

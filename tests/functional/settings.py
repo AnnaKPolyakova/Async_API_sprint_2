@@ -1,10 +1,11 @@
 import os
+from logging import config as logging_config
 from pathlib import Path
 
 from dotenv import load_dotenv
 from pydantic import BaseSettings, Field
+
 from tests.functional.logger import LOGGING
-from logging import config as logging_config
 
 BASE_DIR = Path(__file__).resolve().parent
 

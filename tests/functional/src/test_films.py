@@ -1,4 +1,5 @@
 import pytest
+
 from tests.functional.settings import test_settings
 from tests.functional.testdata.movies import MOVIES_DATA
 

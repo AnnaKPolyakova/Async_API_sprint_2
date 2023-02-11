@@ -6,10 +6,8 @@ import redis
 
 from src.core.config import settings
 from src.etl.db.postgres import get_postgres_connect
-from src.etl.defines import (
-    LAST_EXTRACT_DATA_FOR_GENRE,
-    LAST_EXTRACT_DATA_FOR_PERSON
-)
+from src.etl.defines import (LAST_EXTRACT_DATA_FOR_GENRE,
+                             LAST_EXTRACT_DATA_FOR_PERSON)
 
 MODELS_AND_FILTERS_FIELDS = {
     LAST_EXTRACT_DATA_FOR_PERSON: "person_film_work__person__modified__gt",

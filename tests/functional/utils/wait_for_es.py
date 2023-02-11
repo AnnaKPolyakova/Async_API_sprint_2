@@ -1,8 +1,9 @@
 import logging
 import time
-from tests.functional.settings import test_settings
+
 from elasticsearch import Elasticsearch
 
+from tests.functional.settings import test_settings
 
 if __name__ == '__main__':
     host = test_settings.ELASTIC_HOST

@@ -36,5 +36,7 @@ class ObjectsFinder(ABSObjectsFinder):
             films = await self.searcher.get_objs_from_elastic(
                 size, page, sort, filter
             )
-            await self.casher.put_objs_to_cache(films, size, page, sort, filter)
+            await self.casher.put_objs_to_cache(
+                films, size, page, sort, filter
+            )
         return films

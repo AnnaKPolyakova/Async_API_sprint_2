@@ -1,15 +1,14 @@
-from typing import List, Union, Optional
-from aioredis import Redis
+from typing import List, Union
+
 import orjson
+from aioredis import Redis
 from elasticsearch import NotFoundError
 
 from src.core.config import settings
 from src.models.film import Film
-from src.models.person import Person
 from src.models.genre import Genre
-
+from src.models.person import Person
 from src.services.abc_services.abs_casher import ABSCasher
-
 from src.services.defines import INDEXES_AND_MODELS
 
 
@@ -66,8 +65,7 @@ class Casher(ABSCasher):
         key = await self.get_list_objects_cache_key(
             self.index, size, page, sort, filter
         )
-        data = None
-        # data = await self.redis.get(key)
+        data = await self.redis.get(key)
         if not data:
             return []
         return [self.model.parse_raw(item) for item in orjson.loads(data)]

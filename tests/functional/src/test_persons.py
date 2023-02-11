@@ -1,4 +1,5 @@
 import pytest
+
 from tests.functional.settings import test_settings
 from tests.functional.testdata.persons import PERSONS_DATA
 
@@ -36,13 +37,11 @@ async def test_persons_search_with_sort(
 
 
 @pytest.mark.asyncio
-async def test_persons_search_with_sort(
+async def test_persons_search_with_filter(
         session, es_client, persons_index_create, es_write_persons_data
 ):
-    url = (
-            test_settings.SERVICE_URL +
-            '/api/v1/persons/?filter=full_name::Mark Hamill'
-    )
+    url = test_settings.SERVICE_URL + \
+          '/api/v1/persons/?filter=full_name::Mark Hamill'
     async with session.get(url) as response:
         body = await response.json()
         assert response.status == 200

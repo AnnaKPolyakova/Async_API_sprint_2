@@ -1,9 +1,9 @@
 import logging
 import time
 
-from tests.functional.settings import test_settings
 import redis
 
+from tests.functional.settings import test_settings
 
 if __name__ == '__main__':
     host = test_settings.REDIS_HOST
