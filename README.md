@@ -58,6 +58,14 @@ http://0.0.0.0:8000/api/v1/....
 Для остановки контейнера:  
 * `docker-compose -f docker-compose-local.yml down --rmi all --volumes`
 
+### Тестирование  
+
+Создаем в папке tests/functional файл с названием .env_test и добавляем в него 
+необходимые переменные  
+Пример в .env_test.example - для запуска тестов целиком в docker  
+Пример в .env_test.example - local - для запуска тестов локально и 
+частично в docker
+
 
 #### Запуск тестов в контейнере docker  
 
@@ -69,6 +77,7 @@ http://0.0.0.0:8000/api/v1/....
 #### Запуск тестов частично в контейнере docker  
 
 * `docker-compose -f tests/functional/docker-compose-test-local.yml up --build`
+* `pytest tests/functional/src`
 
 Для остановки контейнера: 
 * `docker-compose -f tests/functional/docker-compose-test-local.yml down --rmi all`
