@@ -1,5 +1,5 @@
 from typing import Dict, List, Union
-from api.v1.base import IDAMixin
+from src.api.v1.base import IDAMixin
 
 
 class Film(IDAMixin):

@@ -4,11 +4,11 @@ from typing import Dict, List
 
 from psycopg2 import OperationalError
 
-from core.config import settings
-from etl.backoff import backoff
-from etl.extractor import Extractor
-from etl.loader import Loader
-from etl.transformer import GenreDataTransformer, PersonDataTransformer
+from src.core.config import settings
+from src.etl.backoff import backoff
+from src.etl.extractor import Extractor
+from src.etl.loader import Loader
+from src.etl.transformer import GenreDataTransformer, PersonDataTransformer
 
 logger = logging.getLogger(__name__)
 
@@ -17,7 +17,7 @@ DATA_LOADING_WAS_COMPLETED = (
     "Data loading was completed for all (number) parts"
 )
 
-SIZE_FOR_LOAD_TO_ELASTICSEARCH = settings["SIZE_FOR_LOAD_TO_ELASTICSEARCH"]
+SIZE_FOR_LOAD_TO_ELASTICSEARCH = settings.SIZE_FOR_LOAD_TO_ELASTICSEARCH
 
 
 class DBUpdater:

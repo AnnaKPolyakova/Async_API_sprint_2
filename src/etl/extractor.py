@@ -4,9 +4,9 @@ from typing import Set
 
 import redis
 
-from core.config import settings
-from etl.db.postgres import get_postgres_connect
-from etl.defines import (
+from src.core.config import settings
+from src.etl.db.postgres import get_postgres_connect
+from src.etl.defines import (
     LAST_EXTRACT_DATA_FOR_GENRE,
     LAST_EXTRACT_DATA_FOR_PERSON
 )
@@ -32,8 +32,8 @@ NEW_DATES_SET = "New date {date} for updating was set for {obj_name}"
 class Extractor:
     def __init__(self):
         self.redis_db: redis.Redis = redis.Redis(
-            host=settings["REDIS_HOST"],
-            port=settings["REDIS_PORT"],
+            host=settings.REDIS_HOST,
+            port=settings.REDIS_PORT,
             db=0
         )
         self.pg_connect = get_postgres_connect()

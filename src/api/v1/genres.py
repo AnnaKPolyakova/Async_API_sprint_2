@@ -3,10 +3,10 @@ from typing import List, Union
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 
-from api.v1.models_schems import Genre
-from core.config import settings
-from services.objects_finder import ObjectsFinder
-from services.services import get_genre_service
+from src.api.v1.models_schems import Genre
+from src.core.config import settings
+from src.services.objects_finder import ObjectsFinder
+from src.services.services import get_genre_service
 
 router = APIRouter()
 
@@ -27,7 +27,7 @@ async def genre_details(
 @router.get("/", response_model=List[Genre])
 async def genre_list(
     size: int = Query(
-        default=settings["SIZE"],
+        default=settings.SIZE,
         title="Genres numbers per page",
         ge=0
     ),

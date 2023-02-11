@@ -1,10 +1,10 @@
-from etl.defines import GENRES, PERSONS, MOVIES
-from models.film import Film
-from models.person import Person
-from models.genre import Genre
+from src.core.config import settings
+from src.models.film import Film
+from src.models.person import Person
+from src.models.genre import Genre
 
 INDEXES_AND_MODELS = {
-    GENRES: Genre,
-    PERSONS: Person,
-    MOVIES: Film
+    settings.GENRES_INDEX: Genre,
+    settings.PERSONS_INDEX: Person,
+    settings.MOVIES_INDEX: Film
 }

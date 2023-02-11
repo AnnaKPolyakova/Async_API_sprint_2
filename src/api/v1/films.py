@@ -3,10 +3,10 @@ from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 
-from api.v1.models_schems import Film, FilmList
-from core.config import settings
-from services.objects_finder import ObjectsFinder
-from services.services import get_film_service
+from src.api.v1.models_schems import Film, FilmList
+from src.core.config import settings
+from src.services.objects_finder import ObjectsFinder
+from src.services.services import get_film_service
 
 router = APIRouter()
 
@@ -27,7 +27,7 @@ async def film_details(
 @router.get("/", response_model=List[FilmList])
 async def film_list(
     size: int = Query(
-        default=settings["SIZE"], title="Films numbers per page", ge=0
+        default=settings.SIZE, title="Films numbers per page", ge=0
     ),
     page: int = Query(default=1, title="Page number", ge=0),
     sort: str = Query(

@@ -58,3 +58,18 @@ http://0.0.0.0:8000/api/v1/....
 Для остановки контейнера:  
 * `docker-compose -f docker-compose-local.yml down --rmi all --volumes`
 
+
+#### Запуск тестов в контейнере docker  
+
+* `docker-compose -f tests/functional/docker-compose-test.yml up --build`
+
+Для остановки контейнера: 
+* `docker-compose -f tests/functional/docker-compose-test.yml down --rmi all`
+
+#### Запуск тестов частично в контейнере docker  
+
+* `docker-compose -f tests/functional/docker-compose-test-local.yml up --build`
+
+Для остановки контейнера: 
+* `docker-compose -f tests/functional/docker-compose-test-local.yml down --rmi all`
+

@@ -1,7 +1,7 @@
 import logging
 from typing import List
 
-from etl.defines import GENRES, PERSONS
+from src.core.config import settings
 
 logger = logging.getLogger(__name__)
 
@@ -17,7 +17,7 @@ class GenreDataTransformer:
             del obj["modified"]
             self.genres_list.append(
                 {
-                    "_index": GENRES,
+                    "_index": settings.GENRES_INDEX,
                     "_id": obj["id"],
                     "_source": obj,
                 }
@@ -37,7 +37,7 @@ class PersonDataTransformer:
             del obj["modified"]
             self.persons_list.append(
                 {
-                    "_index": PERSONS,
+                    "_index": settings.PERSONS_INDEX,
                     "_id": obj["id"],
                     "_source": obj,
                 }

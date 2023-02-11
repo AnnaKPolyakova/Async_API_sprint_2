@@ -1,7 +1,7 @@
 import orjson
 from pydantic import BaseModel
 
-from models.utils import orjson_dumps
+from src.models.utils import orjson_dumps
 
 
 class IDAndConfigMixin(BaseModel):

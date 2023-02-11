@@ -1,6 +1,6 @@
 from typing import Union
 
-from models.base import IDAndConfigMixin
+from src.models.base import IDAndConfigMixin
 
 
 class Person(IDAndConfigMixin):

@@ -1,9 +1,9 @@
 from typing import Optional, Union
 
-from models.film import Film
-from services.abc_services.abs_casher import ABSCasher
-from services.abc_services.abs_searcher import ABSSearcher
-from services.abc_services.abs_service import ABSObjectsFinder
+from src.models.film import Film
+from src.services.abc_services.abs_casher import ABSCasher
+from src.services.abc_services.abs_searcher import ABSSearcher
+from src.services.abc_services.abs_service import ABSObjectsFinder
 
 
 class ObjectsFinder(ABSObjectsFinder):

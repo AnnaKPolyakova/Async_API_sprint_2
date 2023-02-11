@@ -1,9 +1,9 @@
-from abc import abstractmethod
+import logging
 from typing import List, Optional, Union
 from pydantic import BaseModel
 from elasticsearch import AsyncElasticsearch, NotFoundError
-from services.abc_services.abs_searcher import ABSSearcher
-from services.defines import INDEXES_AND_MODELS
+from src.services.abc_services.abs_searcher import ABSSearcher
+from src.services.defines import INDEXES_AND_MODELS
 
 
 class Searcher(ABSSearcher):
@@ -32,6 +32,7 @@ class Searcher(ABSSearcher):
             sort: Union[str, None],
             filter: Union[str, None]
     ) -> List[BaseModel]:
+        page -= 1
         data = {
             "index": self.index,
             "body": {

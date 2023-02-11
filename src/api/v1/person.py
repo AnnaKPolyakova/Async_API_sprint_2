@@ -3,10 +3,10 @@ from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 
-from api.v1.models_schems import Person
-from core.config import settings
-from services.objects_finder import ObjectsFinder
-from services.services import get_person_service
+from src.api.v1.models_schems import Person
+from src.core.config import settings
+from src.services.objects_finder import ObjectsFinder
+from src.services.services import get_person_service
 
 router = APIRouter()
 
@@ -27,7 +27,7 @@ async def person_details(
 @router.get("/", response_model=List[Person])
 async def person_list(
     size: int = Query(
-        settings["SIZE"], description="Films numbers per page", ge=0
+        settings.SIZE, description="Films numbers per page", ge=0
     ),
     page: int = Query(1, description="Page number", ge=0),
     sort: str = Query(
