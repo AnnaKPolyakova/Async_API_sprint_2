@@ -1,4 +1,4 @@
-from typing import List, Optional, Union
+from typing import Optional
 
 from elasticsearch import AsyncElasticsearch, NotFoundError
 from pydantic import BaseModel
@@ -30,9 +30,9 @@ class Searcher(ABSSearcher):
             self,
             size: int,
             page: int,
-            sort: Union[str, None],
-            filter: Union[str, None]
-    ) -> List[BaseModel]:
+            sort: Optional[str],
+            filter: Optional[str]
+    ) -> list[BaseModel]:
         page -= 1
         data = {
             "index": self.index,

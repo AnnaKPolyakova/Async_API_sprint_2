@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
-from typing import List, Union
+from typing import Optional
 
 
-class ABSCasher(ABC):
+class ABSCacher(ABC):
 
     @abstractmethod
     async def put_by_id_to_cache(self, obj) -> None:
@@ -11,11 +11,11 @@ class ABSCasher(ABC):
     @abstractmethod
     async def put_objs_to_cache(
             self,
-            objs: List,
+            objs: list,
             size: int,
             page: int,
-            sort: Union[str, None],
-            filter: Union[str, None],
+            sort: Optional[str],
+            filter: Optional[str],
     ):
         pass
 
@@ -28,9 +28,9 @@ class ABSCasher(ABC):
             self,
             size: int,
             page: int,
-            sort: Union[str, None],
-            filter: Union[str, None]
-    ) -> List:
+            sort: Optional[str],
+            filter: Optional[str]
+    ) -> list:
         pass
 
     @abstractmethod

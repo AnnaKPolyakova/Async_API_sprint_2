@@ -1,8 +1,8 @@
-import aioredis
 import uvicorn
 from elasticsearch import AsyncElasticsearch
 from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
+from redis import asyncio as aioredis
 
 from src.api.v1 import films, genres, person
 from src.core.config import settings
@@ -18,7 +18,11 @@ app = FastAPI(
 
 @app.on_event("startup")
 async def startup():
-    url = settings.REDIS_PROTOCOL + "://" + settings.REDIS_HOST
+    url_template = "{redis_protocol}://{redis_host}"
+    url = url_template.format(
+        redis_protocol=settings.REDIS_PROTOCOL,
+        redis_host=settings.REDIS_HOST
+    )
     redis.redis = await aioredis.from_url(url)
     elastic.es = AsyncElasticsearch(
         hosts=[f"{settings.ELASTIC_HOST}:{settings.ELASTIC_PORT}"]

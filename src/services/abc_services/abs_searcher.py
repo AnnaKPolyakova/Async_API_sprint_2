@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import List, Optional, Union
+from typing import Optional
 
 from pydantic import BaseModel
 
@@ -15,7 +15,7 @@ class ABSSearcher(ABC):
             self,
             size: int,
             page: int,
-            sort: Union[str, None],
-            filter: Union[str, None]
-    ) -> List[BaseModel]:
+            sort: Optional[str],
+            filter: Optional[str]
+    ) -> list[BaseModel]:
         pass

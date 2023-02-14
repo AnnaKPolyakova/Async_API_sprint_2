@@ -1,5 +1,4 @@
 from http import HTTPStatus
-from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 
@@ -24,7 +23,7 @@ async def film_details(
     return film_dict
 
 
-@router.get("/", response_model=List[FilmList])
+@router.get("/", response_model=list[FilmList])
 async def film_list(
     size: int = Query(
         default=settings.SIZE, title="Films numbers per page", ge=0
@@ -40,6 +39,6 @@ async def film_list(
         None, description="Filter by genre id (Example: title::Wyclef Jean)"
     ),
     film_service: ObjectsFinder = Depends(get_film_service),
-) -> List[Film]:
+) -> list[Film]:
     films = await film_service.get_objs_list(size, page, sort, filter)
     return [FilmList(**film.dict(by_alias=True)) for film in films]

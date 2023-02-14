@@ -1,8 +1,8 @@
-from typing import Union
+from typing import Optional
 
 from src.models.base import IDAndConfigMixin
 
 
 class Genre(IDAndConfigMixin):
     name: str
-    description: Union[str, None] = None
+    description: Optional[str] = None

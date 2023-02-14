@@ -1,4 +1,4 @@
-from typing import Dict, List, Union
+from typing import Optional
 
 from src.api.v1.base import IDAMixin
 
@@ -6,26 +6,26 @@ from src.api.v1.base import IDAMixin
 class Film(IDAMixin):
     title: str
     imdb_rating: float
-    description: Union[str, None] = None
-    genre: List[str]
-    director: List[str]
-    writers: Union[List[Dict], None] = None
-    writers_names: Union[List[str], None] = None
-    actors: Union[List[Dict], None] = None
-    actors_names: Union[List[str], None] = None
+    description: Optional[str] = None
+    genre: list[str]
+    director: list[str]
+    writers: Optional[list[dict]] = None
+    writers_names: Optional[list[str]] = None
+    actors: Optional[list[dict]] = None
+    actors_names: Optional[list[str]] = None
 
 
 class FilmList(IDAMixin):
     title: str
     imdb_rating: float
-    description: Union[str, None] = None
+    description: Optional[str] = None
 
 
 class Genre(IDAMixin):
     name: str
-    description: Union[str, None] = None
+    description: Optional[str] = None
 
 
 class Person(IDAMixin):
     full_name: str
-    gender: Union[str, None] = None
+    gender: Optional[str] = None

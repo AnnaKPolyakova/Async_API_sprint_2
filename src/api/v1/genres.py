@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import List, Union
+from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 
@@ -24,7 +24,7 @@ async def genre_details(
     return enre_dict
 
 
-@router.get("/", response_model=List[Genre])
+@router.get("/", response_model=list[Genre])
 async def genre_list(
     size: int = Query(
         default=settings.SIZE,
@@ -32,12 +32,12 @@ async def genre_list(
         ge=0
     ),
     page: int = Query(1, description="Page number", ge=0),
-    sort: Union[str, None] = Query(
+    sort: Optional[str] = Query(
         None, description="Sorting fields (Example: name:desc)"),
-    filter: Union[str, None] = Query(
+    filter: Optional[str] = Query(
         None, description="Filter by genre id (Example: name::Wyclef Jean)"
     ),
     genre_service: ObjectsFinder = Depends(get_genre_service),
-) -> List[Genre]:
+) -> list[Genre]:
     genres = await genre_service.get_objs_list(size, page, sort, filter)
     return [Genre(**genre.dict(by_alias=True)) for genre in genres]

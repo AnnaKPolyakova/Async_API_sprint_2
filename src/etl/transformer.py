@@ -1,5 +1,4 @@
 import logging
-from typing import List
 
 from src.core.config import settings
 
@@ -7,9 +6,10 @@ logger = logging.getLogger(__name__)
 
 
 class GenreDataTransformer:
-    def __init__(self, genres_data: List):
-        self.genres_data: List = genres_data
-        self.genres_list: List = list()
+
+    def __init__(self, genres_data: list):
+        self.genres_data: list = genres_data
+        self.genres_list: list = list()
 
     def genres_to_list_of_dict(self):
         logger.debug("Start transformation objects for updating")
@@ -27,9 +27,9 @@ class GenreDataTransformer:
 
 
 class PersonDataTransformer:
-    def __init__(self, genres_data: List):
-        self.persons_data: List = genres_data
-        self.persons_list: List = list()
+    def __init__(self, genres_data: list):
+        self.persons_data: list = genres_data
+        self.persons_list: list = list()
 
     def genres_to_list_of_dict(self):
         logger.debug("Start transformation objects for updating")

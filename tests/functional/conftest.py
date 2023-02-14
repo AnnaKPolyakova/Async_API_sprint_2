@@ -30,9 +30,12 @@ def get_str_query(index, data):
 
 @pytest.fixture(scope='session')
 async def es_client():
-    url = test_settings.ELASTIC_PROTOCOL + "://" + \
-          test_settings.ELASTIC_HOST_TEST + ":" + \
-          test_settings.ELASTIC_PORT
+    url_template = "{elastic_protocol}://{elastic_host}:{elastic_port}"
+    url = url_template.format(
+        elastic_protocol=test_settings.ELASTIC_PROTOCOL,
+        elastic_host=test_settings.ELASTIC_HOST_TEST,
+        elastic_port=test_settings.ELASTIC_PORT
+    )
     es_client = AsyncElasticsearch(hosts=[url])
     yield es_client
     await es_client.close()

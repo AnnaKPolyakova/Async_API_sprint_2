@@ -1,5 +1,4 @@
 import logging
-from typing import Dict
 
 from elasticsearch import Elasticsearch, helpers
 
@@ -20,7 +19,12 @@ class Loader:
         ELASTIC_PROTOCOL = settings.ELASTIC_PROTOCOL
         ELASTIC_HOST = settings.ELASTIC_HOST
         ELASTIC_PORT = settings.ELASTIC_PORT
-        url = ELASTIC_PROTOCOL + "://" + ELASTIC_HOST + ":" + str(ELASTIC_PORT)
+        url_template = "{elastic_protocol}://{elastic_host}:{elastic_port}"
+        url = url_template.format(
+            elastic_protocol=ELASTIC_PROTOCOL,
+            elastic_host=ELASTIC_HOST,
+            elastic_port=str(ELASTIC_PORT)
+        )
         return Elasticsearch(url)
 
     def _person_index_create(self):
@@ -33,10 +37,10 @@ class Loader:
             index=settings.GENRES_INDEX, ignore=400, body=GENRE_INDEX
         )
 
-    def _load_data(self, data: Dict):
+    def _load_data(self, data: dict):
         helpers.bulk(self.elastic, data)
 
-    def load_persons_data(self, data: Dict):
+    def load_persons_data(self, data: dict):
         if len(data) == 0:
             return
         try:
@@ -49,7 +53,7 @@ class Loader:
         logger.debug("Persons loading done")
         return
 
-    def load_genres_data(self, data: Dict):
+    def load_genres_data(self, data: dict):
         if len(data) == 0:
             return
         try:

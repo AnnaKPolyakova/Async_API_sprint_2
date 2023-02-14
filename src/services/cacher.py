@@ -1,18 +1,18 @@
-from typing import List, Union
+from typing import Optional, Union
 
 import orjson
-from aioredis import Redis
 from elasticsearch import NotFoundError
+from redis.asyncio.client import Redis
 
 from src.core.config import settings
 from src.models.film import Film
 from src.models.genre import Genre
 from src.models.person import Person
-from src.services.abc_services.abs_casher import ABSCasher
+from src.services.abc_services.abs_cacher import ABSCacher
 from src.services.defines import INDEXES_AND_MODELS
 
 
-class Casher(ABSCasher):
+class Cacher(ABSCacher):
     INDEXES_AND_MODELS = INDEXES_AND_MODELS
 
     def __init__(self, redis: Redis, index: str):
@@ -27,11 +27,11 @@ class Casher(ABSCasher):
 
     async def put_objs_to_cache(
             self,
-            objs: Union[List[Film], List[Person], List[Genre]],
+            objs: Union[list[Film], list[Person], list[Genre]],
             size: int,
             page: int,
-            sort: Union[str, None],
-            filter: Union[str, None],
+            sort: Optional[str],
+            filter: Optional[str],
     ):
         if objs is None:
             objs = []
@@ -59,9 +59,9 @@ class Casher(ABSCasher):
             self,
             size: int,
             page: int,
-            sort: Union[str, None],
-            filter: Union[str, None]
-    ) -> List:
+            sort: Optional[str],
+            filter: Optional[str]
+    ) -> list:
         key = await self.get_list_objects_cache_key(
             self.index, size, page, sort, filter
         )

@@ -1,8 +1,8 @@
-from typing import Union
+from typing import Optional
 
 from src.models.base import IDAndConfigMixin
 
 
 class Person(IDAndConfigMixin):
     full_name: str
-    gender: Union[str, None] = None
+    gender: Optional[str] = None

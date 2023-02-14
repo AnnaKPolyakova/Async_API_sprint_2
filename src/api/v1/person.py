@@ -1,5 +1,4 @@
 from http import HTTPStatus
-from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 
@@ -24,7 +23,7 @@ async def person_details(
     return enre_dict
 
 
-@router.get("/", response_model=List[Person])
+@router.get("/", response_model=list[Person])
 async def person_list(
     size: int = Query(
         settings.SIZE, description="Films numbers per page", ge=0
@@ -38,6 +37,6 @@ async def person_list(
         description="Filter by person id (Example: full_name::Wyclef Jean)"
     ),
     person_service: ObjectsFinder = Depends(get_person_service),
-) -> List[Person]:
+) -> list[Person]:
     persons = await person_service.get_objs_list(size, page, sort, filter)
     return [Person(**person.dict(by_alias=True)) for person in persons]

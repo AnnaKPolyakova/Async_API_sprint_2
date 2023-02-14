@@ -1,6 +1,5 @@
 import logging
 from time import sleep
-from typing import Dict, List
 
 from psycopg2 import OperationalError
 
@@ -24,14 +23,14 @@ class DBUpdater:
     def __init__(self):
         self.loader = Loader()
         self.extractor = Extractor()
-        self.genres_data: List[Dict] = list()
-        self.persons_data: List[Dict] = list()
-        self.genres_data_list: List[Dict] = list()
-        self.persons_data_list: List[Dict] = list()
+        self.genres_data: list[dict] = list()
+        self.persons_data: list[dict] = list()
+        self.genres_data_list: list[dict] = list()
+        self.persons_data_list: list[dict] = list()
         self.persons_data_transformer = PersonDataTransformer
         self.genres_data_transformer = GenreDataTransformer
 
-    def _load_data(self, data: List[Dict]):
+    def _load_data(self, data: list[dict]):
         self.loader.load_persons_data(data)
         self.loader.load_genres_data(data)
 

@@ -1,6 +1,6 @@
 from typing import Optional
 
-from aioredis import Redis
+from redis.asyncio.client import Redis
 
 redis: Optional[Redis] = None
 

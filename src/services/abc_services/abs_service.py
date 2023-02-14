@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import List, Optional, Union
+from typing import Optional
 
 from pydantic import BaseModel
 
@@ -7,7 +7,7 @@ from pydantic import BaseModel
 class ABSObjectsFinder(ABC):
 
     @abstractmethod
-    async def get_by_id(self, film_id: str) -> Optional[BaseModel]:
+    async def get_by_id(self, obj_id: str) -> Optional[BaseModel]:
         pass
 
     @abstractmethod
@@ -15,7 +15,7 @@ class ABSObjectsFinder(ABC):
             self,
             size: int,
             page: int,
-            sort: Union[str, None],
-            filter: Union[str, None]
-    ) -> Optional[List[BaseModel]]:
+            sort: Optional[str],
+            filter: Optional[str]
+    ) -> Optional[list[BaseModel]]:
         pass
