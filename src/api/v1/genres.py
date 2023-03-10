@@ -1,5 +1,6 @@
 from http import HTTPStatus
 from typing import Optional
+from fastapi import Request
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 
@@ -7,6 +8,7 @@ from src.api.v1.models_schems import Genre
 from src.core.config import settings
 from src.services.objects_finder import ObjectsFinder
 from src.services.services import get_genre_service
+from src.services.utils import authentication_required
 
 router = APIRouter()
 
@@ -25,7 +27,9 @@ async def genre_details(
 
 
 @router.get("/", response_model=list[Genre])
+@authentication_required
 async def genre_list(
+    request: Request,
     size: int = Query(
         default=settings.SIZE,
         title="Genres numbers per page",

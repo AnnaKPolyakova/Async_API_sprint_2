@@ -33,6 +33,7 @@ class Settings(BaseSettings):
     MOVIES_INDEX: str
     GENRES_INDEX: str
     PERSONS_INDEX: str
+    AUTH_HOST: str
 
     class Config:
         env_file = os.path.join(BASE_DIR, ".env")
