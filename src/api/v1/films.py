@@ -1,4 +1,5 @@
 from http import HTTPStatus
+from fastapi import Request
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 
@@ -6,13 +7,16 @@ from src.api.v1.models_schems import Film, FilmList
 from src.core.config import settings
 from src.services.objects_finder import ObjectsFinder
 from src.services.services import get_film_service
+from src.services.utils import authentication_required
 
 router = APIRouter()
 
 
 @router.get("/{film_id}", response_model=Film)
+@authentication_required
 async def film_details(
-    film_id: str, film_service: ObjectsFinder = Depends(get_film_service)
+        request: Request,
+        film_id: str, film_service: ObjectsFinder = Depends(get_film_service)
 ) -> Film:
     film = await film_service.get_by_id(film_id)
     if not film:
@@ -24,7 +28,9 @@ async def film_details(
 
 
 @router.get("/", response_model=list[FilmList])
+@authentication_required
 async def film_list(
+    request: Request,
     size: int = Query(
         default=settings.SIZE, title="Films numbers per page", ge=0
     ),
