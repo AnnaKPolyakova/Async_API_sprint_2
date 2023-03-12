@@ -1,3 +1,4 @@
+import uuid
 from functools import wraps
 from http import HTTPStatus
 import requests
@@ -12,7 +13,10 @@ def authentication_required(func):
         authorization = kwargs['request'].headers.get('authorization')
         response = getattr(requests, 'get')(
             settings.AUTH_HOST,
-            headers={"Authorization": authorization}
+            headers={
+                "Authorization": authorization,
+                'X-Request-Id': str(uuid.uuid4())
+            }
         )
         if response.status_code != HTTPStatus.OK:
             raise HTTPException(

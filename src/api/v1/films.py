@@ -28,7 +28,6 @@ async def film_details(
 
 
 @router.get("/", response_model=list[FilmList])
-@authentication_required
 async def film_list(
     request: Request,
     size: int = Query(

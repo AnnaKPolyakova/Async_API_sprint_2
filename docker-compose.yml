@@ -26,8 +26,11 @@ services:
       - .env
     volumes:
     - ./storage/redis/data:/data
+    command: --port 6376
     ports:
-    - ${REDIS_PORT}:6379
+    - ${REDIS_PORT}:6376
+    expose:
+    - 6376
     networks:
       - moves_network
 
@@ -56,7 +59,7 @@ services:
       - media_value:/code/media/
     env_file:
       - .env
-    command: uvicorn src.main:app --host 0.0.0.0 --port 8000
+    command: uvicorn src.main:app --host 0.0.0.0 --port 7000
     depends_on:
       - db
       - redis
@@ -83,7 +86,7 @@ services:
   nginx:
     image: nginx:1.19.3
     ports:
-      - "80:80"
+      - "7000:7000"
 
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf
