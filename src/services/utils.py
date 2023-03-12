@@ -15,7 +15,6 @@ def authentication_required(func):
             settings.AUTH_HOST,
             headers={
                 "Authorization": authorization,
-                # 'X-Request-Id': str(uuid.uuid4())
             }
         )
         if response.status_code != HTTPStatus.OK:
