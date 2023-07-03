@@ -13,6 +13,31 @@ jobs:
         python-version: ['3.9']
     runs-on: ubuntu-latest
     services:
+      web-test:
+        build:
+          context: .
+          dockerfile: Dockerfile_test
+        env:
+          ELASTIC_HOST_TEST: movies-elastic
+          ELASTIC_HOST: movies-elastic
+          ELASTIC_PORT: 9200
+          ELASTIC_PROTOCOL: http
+          SIZE_FOR_LOAD_TO_ELASTICSEARCH: 20
+          REDIS_HOST: redis
+          REDIS_PORT: 6379
+          FILM_CACHE_EXPIRE_IN_SECONDS: 350
+          REDIS_PROTOCOL: redis
+          PROJECT_NAME: movies
+          POSTGRES_DB: movies_database
+          POSTGRES_USER: app
+          POSTGRES_PASSWORD: 123qwe
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: 5432
+          SIZE: 2
+          MOVIES_INDEX: movies_test
+          GENRES_INDEX: genres_test
+          PERSONS_INDEX: persons_test
+          SERVICE_URL: http://web-test:8000
       elasticsearch:
         image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
         ports:
