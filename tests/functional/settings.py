@@ -13,18 +13,18 @@ load_dotenv(dotenv_path=os.path.join(BASE_DIR, ".env_test"), override=True)
 
 
 class TestSettings(BaseSettings):
-    ELASTIC_HOST_TEST: str
-    ELASTIC_HOST: str
-    ELASTIC_PORT: str
-    ELASTIC_PROTOCOL: str
-    REDIS_HOST: str
-    REDIS_PORT: str
-    REDIS_PROTOCOL: str
-    SERVICE_URL: str
-    MOVIES_INDEX: str
-    GENRES_INDEX: str
-    SIZE: int
-    PERSONS_INDEX: str = Field(env='PERSONS_INDEX')
+    ELASTIC_HOST_TEST: str = Field(env="ELASTIC_HOST_TEST", default="127.0.0.1")
+    ELASTIC_HOST: str = Field(env="ELASTIC_HOST", default="movies-elastic")
+    ELASTIC_PORT: str = Field(env="ELASTIC_PORT", default="9200")
+    ELASTIC_PROTOCOL: str = Field(env="ELASTIC_PROTOCOL", default="http")
+    REDIS_HOST: str = Field(env="REDIS_HOST", default="redis")
+    REDIS_PORT: str = Field(env="REDIS_PORT", default="6379")
+    REDIS_PROTOCOL: str = Field(env="REDIS_PROTOCOL", default="redis")
+    SERVICE_URL: str = Field(env="SERVICE_URL", default="http://0.0.0.0:8000")
+    MOVIES_INDEX: str = Field(env="MOVIES_INDEX", default="movies_test")
+    GENRES_INDEX: str = Field(env="GENRES_INDEX", default="genres_test")
+    SIZE: int = Field(env="SIZE", default=2)
+    PERSONS_INDEX: str = Field(env='PERSONS_INDEX', default="persons_test")
 
     class Config:
         env_file = os.path.join(BASE_DIR, ".env_test")
