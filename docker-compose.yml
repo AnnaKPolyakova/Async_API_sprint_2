@@ -53,6 +53,7 @@ services:
 
   web:
     build: .
+#    image: sova040888/async_api:latest
     restart: always
     volumes:
       - static_value:/code/static/
