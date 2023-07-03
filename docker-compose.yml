@@ -26,16 +26,16 @@ services:
       - .env
     volumes:
     - ./storage/redis/data:/data
-    command: --port 6379
+    command: --port 6376
     ports:
-    - ${REDIS_PORT}:6379
+    - ${REDIS_PORT}:6376
     expose:
-    - 6379
+    - 6376
     networks:
       - moves_network
 
   elastic:
-    image: docker.elastic.co/elasticsearch/elasticsearch:latest
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
 #    image: sova040888/elasticsearch_db:latest
     container_name: movies-elastic
     environment:
@@ -61,7 +61,7 @@ services:
       - media_value:/code/media/
     env_file:
       - .env
-    command: uvicorn src.main:app --host 0.0.0.0 --port 7000
+    command: uvicorn src.main:app --host 0.0.0.0 --port 6000
     depends_on:
       - db
       - redis
