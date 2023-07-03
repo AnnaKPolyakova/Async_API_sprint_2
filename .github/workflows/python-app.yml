@@ -21,7 +21,7 @@ jobs:
       db:
         image: postgres:12.4
         env:
-          POSTGRES_DB: 'async_api_test'
+          POSTGRES_DB: 'movies-elastic'
           POSTGRES_USER: 'app'
           POSTGRES_PASSWORD: '123qwe'
         ports:
