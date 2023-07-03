@@ -59,7 +59,7 @@ services:
       - media_value:/code/media/
     env_file:
       - .env_test
-    command: uvicorn src.main:app --host 0.0.0.0 --port 8000
+    command: uvicorn src.main:app --host 0.0.0.0 --port 7000
     depends_on:
       - db
       - redis
@@ -67,7 +67,7 @@ services:
     networks:
       - moves_network
     ports:
-      - 8000:8000
+      - 7000:7000
 
 volumes:
   postgres_data:

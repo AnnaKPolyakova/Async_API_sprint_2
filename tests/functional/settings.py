@@ -18,7 +18,7 @@ class TestSettings(BaseSettings):
     ELASTIC_PORT: str = Field(env="ELASTIC_PORT", default="9200")
     ELASTIC_PROTOCOL: str = Field(env="ELASTIC_PROTOCOL", default="http")
     REDIS_HOST: str = Field(env="REDIS_HOST", default="redis")
-    REDIS_PORT: str = Field(env="REDIS_PORT", default="6379")
+    REDIS_PORT: str = Field(env="REDIS_PORT", default="6376")
     REDIS_PROTOCOL: str = Field(env="REDIS_PROTOCOL", default="redis")
     SERVICE_URL: str = Field(env="SERVICE_URL", default="http://0.0.0.0:8000")
     MOVIES_INDEX: str = Field(env="MOVIES_INDEX", default="movies_test")

@@ -48,7 +48,7 @@ http://0.0.0.0/api/v1/....
 
 * `docker-compose -f docker-compose-local.yml up --build`
 * `python src/main.py`
-* `python -m etl.db_updater`
+* `python -m src.etl.db_updater`
 
 Документация по адресу:  
 http://0.0.0.0:8000/api/openapi
