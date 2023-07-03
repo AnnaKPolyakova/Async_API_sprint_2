@@ -13,7 +13,9 @@ load_dotenv(dotenv_path=os.path.join(BASE_DIR, ".env_test"), override=True)
 
 
 class TestSettings(BaseSettings):
-    ELASTIC_HOST_TEST: str = Field(env="ELASTIC_HOST_TEST", default="127.0.0.1")
+    ELASTIC_HOST_TEST: str = Field(
+        env="ELASTIC_HOST_TEST", default="127.0.0.1"
+    )
     ELASTIC_HOST: str = Field(env="ELASTIC_HOST", default="movies-elastic")
     ELASTIC_PORT: str = Field(env="ELASTIC_PORT", default="9200")
     ELASTIC_PROTOCOL: str = Field(env="ELASTIC_PROTOCOL", default="http")
