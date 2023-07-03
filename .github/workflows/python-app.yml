@@ -13,31 +13,29 @@ jobs:
         python-version: ['3.9']
     runs-on: ubuntu-latest
     services:
-      web-test:
-        build:
-          context: .
-          dockerfile: Dockerfile_test
-        env:
-          ELASTIC_HOST_TEST: movies-elastic
-          ELASTIC_HOST: movies-elastic
-          ELASTIC_PORT: 9200
-          ELASTIC_PROTOCOL: http
-          SIZE_FOR_LOAD_TO_ELASTICSEARCH: 20
-          REDIS_HOST: redis
-          REDIS_PORT: 6379
-          FILM_CACHE_EXPIRE_IN_SECONDS: 350
-          REDIS_PROTOCOL: redis
-          PROJECT_NAME: movies
-          POSTGRES_DB: movies_database
-          POSTGRES_USER: app
-          POSTGRES_PASSWORD: 123qwe
-          POSTGRES_HOST: localhost
-          POSTGRES_PORT: 5432
-          SIZE: 2
-          MOVIES_INDEX: movies_test
-          GENRES_INDEX: genres_test
-          PERSONS_INDEX: persons_test
-          SERVICE_URL: http://web-test:8000
+#      web-test:
+#        build: .
+#        env:
+#          ELASTIC_HOST_TEST: movies-elastic
+#          ELASTIC_HOST: movies-elastic
+#          ELASTIC_PORT: 9200
+#          ELASTIC_PROTOCOL: http
+#          SIZE_FOR_LOAD_TO_ELASTICSEARCH: 20
+#          REDIS_HOST: redis
+#          REDIS_PORT: 6379
+#          FILM_CACHE_EXPIRE_IN_SECONDS: 350
+#          REDIS_PROTOCOL: redis
+#          PROJECT_NAME: movies
+#          POSTGRES_DB: movies_database
+#          POSTGRES_USER: app
+#          POSTGRES_PASSWORD: 123qwe
+#          POSTGRES_HOST: localhost
+#          POSTGRES_PORT: 5432
+#          SIZE: 2
+#          MOVIES_INDEX: movies_test
+#          GENRES_INDEX: genres_test
+#          PERSONS_INDEX: persons_test
+#          SERVICE_URL: http://web-test:8000
       elasticsearch:
         image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
         ports:
@@ -79,6 +77,12 @@ jobs:
         python -m pip install --upgrade pip
         pip install wemake-python-styleguide flake8-html lxml mypy
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+    - name: Build Docker image
+      run: docker build -t name:latest . -f Dockerfile_test --build-arg POSTGRES_USER=app .
+
+    - name: Run Docker container
+      run: docker run -d -p 8000:8000 name:latest uvicorn src.main:app --host 0.0.0.0 --port 8000
 
     - name: Test with pytest
       run: |
