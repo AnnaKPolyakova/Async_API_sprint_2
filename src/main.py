@@ -4,9 +4,14 @@ from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
 from redis import asyncio as aioredis
 
-from src.api.v1 import films, genres, person
-from src.core.config import settings
-from src.db import elastic, redis
+try:
+    from src.api.v1 import films, genres, person
+    from src.core.config import settings
+    from src.db import elastic, redis
+except Exception:
+    from api.v1 import films, genres, person
+    from core.config import settings
+    from db import elastic, redis
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
