@@ -109,48 +109,27 @@ jobs:
             key: ${{ secrets.SERVER_SSH_KEY }}
             passphrase: ${{ secrets.SERVER_PASSPHRASE }}
             script: |
-              cd auth_app
+              cd async_api
               sudo docker-compose down --rmi all
               rm .env
               touch .env
-              echo REDIS_HOST=${{ secrets.REDIS_HOST }} >> .env
-              echo REDIS_PORT=${{ secrets.REDIS_PORT }} >> .env
-              echo FILM_CACHE_EXPIRE_IN_SECONDS=${{ secrets.FILM_CACHE_EXPIRE_IN_SECONDS }} >> .env
-              echo REDIS_PROTOCOL=${{ secrets.REDIS_PROTOCOL }} >> .env
+              echo AUTH_HOST=${{ secrets.AUTH_HOST }} >> .env
+              echo MOVIES_INDEX=${{ secrets.MOVIES_INDEX }} >> .env
+              echo GENRES_INDEX=${{ secrets.GENRES_INDEX }} >> .env
+              echo PERSONS_INDEX=${{ secrets.PERSONS_INDEX }} >> .env
+              echo SIZE=${{ secrets.SIZE }} >> .env
               echo POSTGRES_DB=${{ secrets.POSTGRES_DB }} >> .env
               echo POSTGRES_USER=${{ secrets.POSTGRES_USER }} >> .env
               echo POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} >> .env
               echo POSTGRES_HOST=${{ secrets.POSTGRES_HOST }} >> .env
               echo POSTGRES_PORT=${{ secrets.POSTGRES_PORT }} >> .env
-              echo POSTGRES_DB_TEST=${{ secrets.POSTGRES_DB_TEST }} >> .env
-              echo JWT_SECRET_KEY=${{ secrets.JWT_SECRET_KEY }} >> .env
-              echo PAGE_SIZE=${{ secrets.PAGE_SIZE }} >> .env
-              echo CLIENT_ID_YANDEX=${{ secrets.CLIENT_ID_YANDEX }} >> .env
-              echo SECRET_YANDEX=${{ secrets.SECRET_YANDEX }} >> .env
-              echo AUTH_URL_YANDEX=${{ secrets.AUTH_URL_YANDEX }} >> .env
-              echo TOKEN_URL_YANDEX=${{ secrets.TOKEN_URL_YANDEX }} >> .env
-              echo USER_INFO_URL_YANDEX=${{ secrets.USER_INFO_URL_YANDEX }} >> .env
-              echo CLIENT_ID_VK=${{ secrets.CLIENT_ID_VK }} >> .env
-              echo SECRET_VK=${{ secrets.SECRET_VK }} >> .env
-              echo AUTH_URL_VK=${{ secrets.AUTH_URL_VK }} >> .env
-              echo TOKEN_URL_VK=${{ secrets.TOKEN_URL_VK }} >> .env
-              echo VERSION_VK=${{ secrets.VERSION_VK }} >> .env
-              echo AGENT_HOST_NAME=${{ secrets.AGENT_HOST_NAME }} >> .env
-              echo AGENT_PORT=${{ secrets.AGENT_PORT }} >> .env
-              echo TRACER_ON=${{ secrets.TRACER_ON }} >> .env
-              echo DEFAULT_LIMITS=${{ secrets.DEFAULT_LIMITS }} >> .env
-              sudo docker-compose up -d
-              cd ..
-              cd async_api
-              sudo docker-compose down --rmi all
-              rm .env
-              touch .env
-              echo REDIS_HOST=${{ secrets.PROXY_REDIS_HOST }} >> .env
-              echo REDIS_PORT=${{ secrets.PROXY_REDIS_PORT }} >> .env
-              echo REDIS_PROTOCOL=${{ secrets.PROXY_REDIS_PROTOCOL }} >> .env
-              echo MAX_REQUEST_COUNT=${{ secrets.MAX_REQUEST_COUNT }} >> .env
-              echo EX_TIME=${{ secrets.EX_TIME }} >> .env
-              echo TIMOUT_FOR_REQUEST=${{ secrets.TIMOUT_FOR_REQUEST }} >> .env
-              echo AUTH_HOST=${{ secrets.AUTH_HOST }} >> .env
-              echo JWT_SECRET_KEY=${{ secrets.PROXY_JWT_SECRET_KEY }} >> .env
+              echo PROJECT_NAME=${{ secrets.PROJECT_NAME }} >> .env
+              echo REDIS_HOST=${{ secrets.REDIS_HOST }} >> .env
+              echo REDIS_PORT=${{ secrets.REDIS_PORT }} >> .env
+              echo FILM_CACHE_EXPIRE_IN_SECONDS=${{ secrets.FILM_CACHE_EXPIRE_IN_SECONDS }} >> .env
+              echo REDIS_PROTOCOL=${{ secrets.REDIS_PROTOCOL }} >> .env
+              echo ELASTIC_PORT=${{ secrets.ELASTIC_PORT }} >> .env
+              echo ELASTIC_PROTOCOL=${{ secrets.ELASTIC_PROTOCOL }} >> .env
+              echo SIZE_FOR_LOAD_TO_ELASTICSEARCH=${{ secrets.SIZE_FOR_LOAD_TO_ELASTICSEARCH }} >> .env
+              echo ELASTIC_HOST=${{ secrets.ELASTIC_HOST }} >> .env
               sudo docker-compose up -d

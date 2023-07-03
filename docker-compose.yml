@@ -26,16 +26,17 @@ services:
       - .env
     volumes:
     - ./storage/redis/data:/data
-    command: --port 6376
+    command: --port 6379
     ports:
-    - ${REDIS_PORT}:6376
+    - ${REDIS_PORT}:6379
     expose:
-    - 6376
+    - 6379
     networks:
       - moves_network
 
   elastic:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
+    image: docker.elastic.co/elasticsearch/elasticsearch:latest
+#    image: sova040888/elasticsearch_db:latest
     container_name: movies-elastic
     environment:
       - discovery.type=single-node
@@ -70,6 +71,7 @@ services:
 
   etl:
     build: .
+#    image: sova040888/async_api:latest
     restart: always
     volumes:
       - static_value:/code/static/

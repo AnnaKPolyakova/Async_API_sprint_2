@@ -21,11 +21,11 @@ services:
       - .env
     volumes:
     - ./storage/redis/data:/data
-    command: --port 6376
+    command: --port 6379
     ports:
-    - ${REDIS_PORT}:6376
+    - ${REDIS_PORT}:6379
     expose:
-    - 6376
+    - 6379
     networks:
       - moves_network
 
