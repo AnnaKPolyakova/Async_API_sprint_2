@@ -9,7 +9,8 @@ services:
       - ./db_sql_copy:/docker-entrypoint-initdb.d
     env_file:
       - .env
-
+    ports:
+      - 5432:5432
     healthcheck:
       test: "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"
       timeout: 2s
@@ -40,6 +41,7 @@ services:
     container_name: movies-elastic
     environment:
       - discovery.type=single-node
+      - xpack.security.enabled=false
     env_file:
       - .env
     volumes:

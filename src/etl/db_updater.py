@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 LOADED_DATA = "Loaded data for {number} part"
 DATA_LOADING_WAS_COMPLETED = (
-    "Data loading was completed for all (number) parts"
+    "Data loading was completed for all {number} parts"
 )
 
 SIZE_FOR_LOAD_TO_ELASTICSEARCH = settings.SIZE_FOR_LOAD_TO_ELASTICSEARCH

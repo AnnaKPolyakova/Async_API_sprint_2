@@ -33,6 +33,7 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
     environment:
       - discovery.type=single-node
+      - xpack.security.enabled=false
     env_file:
       - .env
     volumes:
