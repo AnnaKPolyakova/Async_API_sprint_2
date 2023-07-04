@@ -36,7 +36,7 @@ services:
 
   elastic:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
-#    image: sova040888/elasticsearch_db:latest
+#    image: sova040888/elasticsearch:8.8.2-amd64
     container_name: movies-elastic
     environment:
       - discovery.type=single-node
