@@ -7,7 +7,7 @@ API for receiving data from es about films, persons, genres
 Technologies and requirements:
 ```
 Python 3.9+
-Fast API
+Fast API 
 ```
 
 ### Docker Settings
